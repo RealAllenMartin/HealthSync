@@ -1,13 +1,11 @@
 package com.example.healthsync.service;
 
 import com.example.healthsync.entity.Patient;
+import com.example.healthsync.exception.ResourceNotFoundException;
 import com.example.healthsync.repository.PatientRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-
-import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Service
 public class PatientService {
@@ -24,7 +22,7 @@ public class PatientService {
 
     public Patient getPatientById(Long id) {
         return patientRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Patient not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Patient not found with id: " + id));
     }
 
     public Patient createPatient(Patient patient) {
