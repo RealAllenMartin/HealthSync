@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.List;
+
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -45,10 +47,20 @@ class PatientControllerTest {
 
         @Bean
         PatientService patientService() {
-            return new PatientService(null, null) {
+            return new PatientService() {
                 @Override
                 public PatientResponseDto createPatient(PatientRequestDto patientRequestDto) {
                     throw new AssertionError("Invalid requests should not reach the service layer");
+                }
+
+                @Override
+                public List<PatientResponseDto> getAllPatients() {
+                    throw new AssertionError("This test should not call getAllPatients");
+                }
+
+                @Override
+                public PatientResponseDto getPatientById(Long id) {
+                    throw new AssertionError("This test should not call getPatientById");
                 }
             };
         }
