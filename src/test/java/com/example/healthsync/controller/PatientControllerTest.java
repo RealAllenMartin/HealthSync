@@ -1,6 +1,7 @@
 package com.example.healthsync.controller;
 
-import com.example.healthsync.entity.Patient;
+import com.example.healthsync.dto.PatientRequestDto;
+import com.example.healthsync.dto.PatientResponseDto;
 import com.example.healthsync.service.PatientService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,9 +45,9 @@ class PatientControllerTest {
 
         @Bean
         PatientService patientService() {
-            return new PatientService(null) {
+            return new PatientService(null, null) {
                 @Override
-                public Patient createPatient(Patient patient) {
+                public PatientResponseDto createPatient(PatientRequestDto patientRequestDto) {
                     throw new AssertionError("Invalid requests should not reach the service layer");
                 }
             };

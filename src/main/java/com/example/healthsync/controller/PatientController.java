@@ -1,6 +1,7 @@
 package com.example.healthsync.controller;
 
-import com.example.healthsync.entity.Patient;
+import com.example.healthsync.dto.PatientRequestDto;
+import com.example.healthsync.dto.PatientResponseDto;
 import com.example.healthsync.service.PatientService;
 import jakarta.validation.Valid;
 import java.util.List;
@@ -22,17 +23,17 @@ public class PatientController {
     }
 
     @GetMapping
-    public List<Patient> getAllPatients() {
+    public List<PatientResponseDto> getAllPatients() {
         return patientService.getAllPatients();
     }
 
     @GetMapping("/{id}")
-    public Patient getPatientById(@PathVariable Long id) {
+    public PatientResponseDto getPatientById(@PathVariable Long id) {
         return patientService.getPatientById(id);
     }
 
     @PostMapping
-    public Patient createPatient(@Valid @RequestBody Patient patient) {
-        return patientService.createPatient(patient);
+    public PatientResponseDto createPatient(@Valid @RequestBody PatientRequestDto patientRequestDto) {
+        return patientService.createPatient(patientRequestDto);
     }
 }
