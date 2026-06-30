@@ -2,13 +2,17 @@ package com.example.healthsync.controller;
 
 import com.example.healthsync.dto.PatientRequestDto;
 import com.example.healthsync.dto.PatientResponseDto;
+import com.example.healthsync.repository.UserRepository;
+import com.example.healthsync.security.JwtService;
 import com.example.healthsync.service.PatientService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
@@ -18,11 +22,16 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(PatientController.class)
+@AutoConfigureMockMvc(addFilters = false)
 @Import(PatientControllerTest.TestConfig.class)
 class PatientControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+    @MockitoBean
+    private UserRepository userRepository;
+    @MockitoBean
+    private JwtService jwtService;
 
     @Test
     void createPatientReturnsBadRequestWhenRequestBodyIsInvalid() throws Exception {
