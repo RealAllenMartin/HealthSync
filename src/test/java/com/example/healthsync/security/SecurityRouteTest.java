@@ -33,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
                 "org.springframework.boot.data.jpa.autoconfigure.DataJpaRepositoriesAutoConfiguration"
 })
 @AutoConfigureMockMvc
-class SecurityServiceRouteTest {
+class SecurityRouteTest {
 
     @Autowired
     private MockMvc mockMvc;

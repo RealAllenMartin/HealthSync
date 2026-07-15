@@ -32,5 +32,9 @@ public class PatientRequestDto {
     private LocalDate dateOfBirth;
 
     @Size(max = 20, message = "Phone number must be 20 characters or fewer")
+    @Pattern(
+            regexp = "^\\+?[0-9() -]{7,20}$",
+            message = "Phone number must contain only digits, spaces, dashes, parentheses, and an optional leading plus sign"
+    )
     private String phoneNumber;
 }
