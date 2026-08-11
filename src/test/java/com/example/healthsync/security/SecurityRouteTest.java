@@ -5,9 +5,11 @@ import com.example.healthsync.dto.PatientResponseDto;
 import com.example.healthsync.entity.Role;
 import com.example.healthsync.entity.User;
 import com.example.healthsync.repository.UserRepository;
+import com.example.healthsync.service.AppointmentService;
 import com.example.healthsync.service.AuthService;
 import com.example.healthsync.service.PatientService;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
@@ -49,6 +51,9 @@ class SecurityRouteTest {
 
     @MockitoBean
     private PatientService patientService;
+
+    @MockitoBean
+    private AppointmentService appointmentService;
 
     @Test
     void registerEndpointIsPublic() throws Exception {
